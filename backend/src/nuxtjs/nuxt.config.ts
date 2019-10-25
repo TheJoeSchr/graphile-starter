@@ -15,7 +15,13 @@ export default {
   },
   loading: { color: "#3B8070" },
   css: ["~/assets/css/main.css"],
-  build: {},
+  build: {
+    extend(config: any, _ctx: any) {
+      return Object.assign({}, config, {
+        devtool: "source-map",
+      });
+    },
+  },
   buildModules: ["@nuxt/typescript-build"],
   modules: [
     "~/modules/nuxt-postgraphile",

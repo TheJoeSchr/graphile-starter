@@ -76,6 +76,7 @@ services:
       - 9678:9678
       - 9876:9876
       - 9757:9757
+      - 9222
     depends_on:
       - db
     # Overrides default command so things don't shut down after the process ends.
