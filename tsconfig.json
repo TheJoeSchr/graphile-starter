@@ -32,7 +32,8 @@
     "declarationMap": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["@app/*"]
+      "@app/*": ["@app/*"],
+      "~/*": ["./@app/server/src/nuxt/*"] // for Vetur
     }
   },
   "exclude": ["@app/e2e"]
