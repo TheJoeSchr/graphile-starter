@@ -26,7 +26,14 @@ export default {
   },
   loading: { color: "#3B8070" },
   css: ["src/nuxt/assets/css/main.css"],
-  build: {},
+  build: {
+    // adds nuxt debug
+    extend(config: any, ctx: any) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+      }
+    },
+  },
   buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios"],
   axios: {},

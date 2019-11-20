@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "env": "nuxt-ts:env",
-    "build": "nuxt-ts:env build",
-    "start": "nuxt-ts:env start",
-    "generate": "nuxt-ts:env generate",
+    "build": "yarn nuxt-ts:env build",
+    "start": "yarn nuxt-ts:env start",
+    "generate": "yarn nuxt-ts:env generate",
     "nuxt-ts:env": "node -r @app/config/env node_modules/.bin/nuxt-ts"
   },
   "dependencies": {
@@ -18,6 +17,7 @@
     "@graphile/pro": "^0.9.0",
     "@graphile/subscriptions-lds": "^4.4.5",
     "@nuxt/types": "^0.3.1",
+    "@nuxt/typescript-build": "^0.3.4",
     "@nuxt/typescript-runtime": "0.2.1",
     "@nuxtjs/apollo": "^4.0.0-rc15",
     "@nuxtjs/axios": "5.6.0",
@@ -46,7 +46,7 @@
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "pg": "^7.12.1",
-    "postgraphile": "^4.4.4",
+    "postgraphile": "^4.5.0-rc.1",
     "redis": "^2.8.0",
     "source-map-support": "^0.5.16",
     "subscriptions-transport-ws": "^0.9.16",
