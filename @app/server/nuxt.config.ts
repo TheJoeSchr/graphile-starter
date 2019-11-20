@@ -1,4 +1,9 @@
+import path from "path";
 export default {
+  modulesDir: [
+    path.resolve(__dirname, "../../node_modules/"),
+    path.resolve(__dirname, "../../@app/"), // TODO: (more testing) let's nuxt see @app after hot-reload
+  ],
   server: {
     //TODO: read $PORT
     port: 5678, // default: 3000

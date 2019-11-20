@@ -16,9 +16,10 @@
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["./../../@app/*"], // let's nuxt find @app packages
       "~/*": ["./src/nuxt/*"] // for nuxt:typecheck
     },
     "types": ["@nuxt/types"]
   },
-  "exclude": ["__tests__", "node_modules"]
+  "exclude": ["__tests__"]
 }

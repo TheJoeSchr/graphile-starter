@@ -19,6 +19,7 @@
     "vuex-class": "0.3.2"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "0.3.4"
+    "@nuxt/typescript-build": "0.3.4",
+    "@types/node": "^12.12.7"
   }
 }
