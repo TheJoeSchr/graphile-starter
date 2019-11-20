@@ -25,13 +25,28 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   loading: { color: "#3B8070" },
-  css: ["src/nuxt/assets/css/main.css"],
+  css: [
+    "src/nuxt/assets/css/main.css",
+    {
+      src: "ant-design-vue/dist/antd.less",
+      lang: "less",
+    },
+  ],
   build: {
-    // adds nuxt debug
     extend(config: any, ctx: any) {
+      // adds nuxt debug
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
+    },
+    loaders: {
+      less: {
+        javascriptEnabled: true,
+        /*         modifyVars: {
+          "primary-color": "rgba(222, 12, 101, 1.0)",
+          "component-background": "#ffffff",
+        }, */
+      },
     },
   },
   buildModules: ["@nuxt/typescript-build"],
