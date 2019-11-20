@@ -7,6 +7,7 @@
     "msjsdiag.debugger-for-chrome", // Chrome debugger integration
     "apollographql.vscode-apollo", // GraphQL support
     "ms-vscode-remote.vscode-remote-extensionpack", // OPTIONAL: develop inside of Docker containers
-    "sdras.vue-vscode-extensionpack" // OPTIONAL: various helpfull Vue extensions
+    "sdras.vue-vscode-extensionpack", //  various helpfull Vue extensions
+    "mrmlnc.vscode-less" // less, because we are using ANTD
   ]
 }
