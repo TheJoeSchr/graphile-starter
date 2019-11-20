@@ -4,8 +4,9 @@
   "recommendations": [
     "dbaeumer.vscode-eslint", // ESLint
     "esbenp.prettier-vscode", // Prettier
-    "apollographql.vscode-apollo", // GraphQL support
     "msjsdiag.debugger-for-chrome", // Chrome debugger integration
-    "ms-vscode-remote.vscode-remote-extensionpack" // OPTIONAL: develop inside of Docker containers
+    "apollographql.vscode-apollo", // GraphQL support
+    "ms-vscode-remote.vscode-remote-extensionpack", // OPTIONAL: develop inside of Docker containers
+    "sdras.vue-vscode-extensionpack" // OPTIONAL: various helpfull Vue extensions
   ]
 }
