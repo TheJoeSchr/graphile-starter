@@ -1,5 +1,5 @@
 import session from "express-session";
-import * as redis from "redis";
+import redis from "redis";
 import ConnectRedis from "connect-redis";
 import ConnectPgSimple from "connect-pg-simple";
 import { Express } from "express";
