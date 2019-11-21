@@ -17,18 +17,23 @@ const nuxtPostgraphile: Module = async function() {
   }
 
   const pgRoute = "/api";
+
   // Log server infos
   this.nuxt.hook("listen", (_server: string, serverOptions: options) => {
     const { https, host, port } = serverOptions;
     const serverUrl = `http${https ? "s" : ""}://${host}:${port}${pgRoute}`;
 
     const badgeMessages = this.options!.cli!.badgeMessages;
-    badgeMessages.push(`${chalk.cyan("GraphQL")}: ${serverUrl}/graphql`);
+    const graphQLlog = `${chalk.cyan("GraphQL")}: ${serverUrl}/graphql`;
+    logger.info(graphQLlog);
+    badgeMessages.push(graphQLlog);
     const config = this.options.postgraphile || {
       options: { graphiql: false },
     };
     if (config.options.graphiql) {
-      badgeMessages.push(`${chalk.magenta("GraphiQL")}: ${serverUrl}/graphiql`);
+      const graphiQLlog = `${chalk.magenta("GraphiQL")}: ${serverUrl}/graphiql`;
+      badgeMessages.push(graphiQLlog);
+      logger.info(graphiQLlog);
     }
   });
 
