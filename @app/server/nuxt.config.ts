@@ -50,6 +50,30 @@ export default {
     },
   },
   buildModules: ["@nuxt/typescript-build"],
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile"],
   axios: {},
+  // TODO: import config from @app/config or similar
+  postgraphile: {
+    options: {
+      //appendPlugins: [PgSimplifyInflectorPlugin],
+      graphiql: true,
+      // Optional customisation
+      graphileBuildOptions: {
+        /*
+         * Uncomment if you are using `simpleCollections: 'only'` and you never
+         * want relay connections
+         */
+        //pgOmitListSuffix: true,
+        /*
+         * Uncomment if you want 'userPatch' instead of 'patch' in update
+         * mutations.
+         */
+        //pgSimplifyPatch: false,
+        /*
+         * Uncomment if you want 'allUsers' instead of 'users' at root level.
+         */
+        //pgSimplifyAllRows: false,
+      },
+    },
+  },
 };
