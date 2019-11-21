@@ -5,9 +5,11 @@
   "private": true,
   "scripts": {
     "build": "yarn nuxt-ts:env build",
+    "dev": "yarn nuxt-ts:env:debug dev",
     "start": "yarn nuxt-ts:env start",
     "generate": "yarn nuxt-ts:env generate",
-    "nuxt-ts:env": "node -r @app/config/env node_modules/.bin/nuxt-ts"
+    "nuxt-ts:env": "node -r @app/config/env node_modules/.bin/nuxt-ts",
+    "nuxt-ts:env:debug": "nodemon -r @app/config/env --inspect=9678 node_modules/.bin/nuxt-ts"
   },
   "dependencies": {
     "@app/client": "0.0.0",
