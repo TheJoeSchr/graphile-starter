@@ -19,9 +19,10 @@ const nuxtPostgraphile: Module = async function() {
   const pgRoute = "/api";
 
   // Log server infos
-  this.nuxt.hook("listen", (_server: string, serverOptions: options) => {
-    const { https, host, port } = serverOptions;
-    const serverUrl = `http${https ? "s" : ""}://${host}:${port}${pgRoute}`;
+  this.nuxt.hook("listen", (_server: string, _serverOptions: options) => {
+    // const { https, host, port } = serverOptions;
+    const rootUrl = process.env.ROOT_URL || "http://localhost:5678"; // default: 3000
+    const serverUrl = `${rootUrl}${pgRoute}`;
 
     const badgeMessages = this.options!.cli!.badgeMessages;
     const graphQLlog = `${chalk.cyan("GraphQL")}: ${serverUrl}/graphql`;

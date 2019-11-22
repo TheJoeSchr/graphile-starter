@@ -5,8 +5,7 @@ export default {
     path.resolve(__dirname, "../../@app/"), // TODO: (more testing) let's nuxt see @app after hot-reload
   ],
   server: {
-    //TODO: read $PORT
-    port: 5678, // default: 3000
+    port: parseInt(process.env.PORT || "", 10) || 3000, // default: 3000
     host: "0.0.0.0", // default: localhost
   },
   srcDir: "src/nuxt",
