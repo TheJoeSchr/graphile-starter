@@ -50,6 +50,7 @@ export default {
   },
   buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile"],
+  plugins: ["~/plugins/composition-api"],
   axios: {},
   // TODO: import config from @app/config or similar
   postgraphile: {

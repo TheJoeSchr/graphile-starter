@@ -9,7 +9,7 @@
     "start": "yarn nuxt-ts:env start",
     "generate": "yarn nuxt-ts:env generate",
     "nuxt-ts:env": "node -r @app/config/env node_modules/.bin/nuxt-ts",
-    "nuxt-ts:env:debug": "nodemon -r @app/config/env --inspect=9678 node_modules/.bin/nuxt-ts"
+    "nuxt-ts:env:debug": "node -r @app/config/env --inspect=9678 node_modules/.bin/nuxt-ts"
   },
   "dependencies": {
     "@app/client": "0.0.0",
@@ -18,10 +18,10 @@
     "@graphile/pg-pubsub": "^4.4.5",
     "@graphile/pro": "^0.9.0",
     "@graphile/subscriptions-lds": "^4.4.5",
-    "@nuxt/types": "^0.3.1",
-    "@nuxt/typescript-runtime": "0.2.1",
-    "@nuxtjs/apollo": "^4.0.0-rc15",
-    "@nuxtjs/axios": "5.6.0",
+    "@nuxt/types": "latest",
+    "@nuxt/typescript-runtime": "latest",
+    "@nuxtjs/apollo": "latest",
+    "@nuxtjs/axios": "latest",
     "@types/chalk": "^2.2.0",
     "@types/connect-pg-simple": "^4.2.0",
     "@types/connect-redis": "^0.0.11",
@@ -33,6 +33,7 @@
     "@types/passport-github": "^1.1.5",
     "@types/pg": "^7.11.2",
     "@types/redis": "^2.8.14",
+    "@vue/composition-api": "^0.3.2",
     "ant-design-vue": "^1.4.4",
     "chalk": "^3.0.0",
     "connect-pg-simple": "^6.0.1",
@@ -43,8 +44,8 @@
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "morgan": "^1.9.1",
-    "nuxt": "2.10.1",
-    "nuxt-property-decorator": "2.4.0",
+    "nuxt": "latest",
+    "nuxt-property-decorator": "latest",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "pg": "^7.12.1",
@@ -56,8 +57,7 @@
     "ws": "^7.2.0"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.3.4",
-    "@types/node": "^12.12.7",
+    "@nuxt/typescript-build": "latest",
     "babel-plugin-import": "^1.12.2",
     "less": "^3.10.3",
     "less-loader": "^5.0.0"
