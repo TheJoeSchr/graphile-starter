@@ -9,7 +9,7 @@
           <h3>{{ state.title }} - {{ state.projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
-          <DropdownButton v-if="isLoggedIn">
+          <DropdownButton v-if="state.isLoggedIn">
             User
             <Menu slot="overlay">
               <MenuItem>
@@ -22,7 +22,7 @@
               </MenuItem>
             </Menu>
           </DropdownButton>
-          <NLink v-if="!isLoggedIn" to="/login">
+          <NLink v-if="!state.isLoggedIn" to="/login">
             <a class="header-login-button">Sign in</a>
           </NLink>
         </Col>
@@ -80,11 +80,11 @@ export default createComponent({
       title: "No title",
       projectName: projectName,
       companyName: companyName,
+      isLoggedIn: computed(() => false),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
-    const isLoggedIn = computed(() => false);
 
-    return { state, isLoggedIn };
+    return { state };
   },
 });
 </script>
