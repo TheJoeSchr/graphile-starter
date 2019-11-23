@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
-import { projectName, companyName } from "@app/config";
+import { projectName, companyName } from "@app/config/src/index.ts";
 import { createComponent, reactive } from "@vue/composition-api";
 import Warn from "~/components/Warn.vue";
 
