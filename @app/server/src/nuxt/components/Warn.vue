@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <span v-if="state.okay"> <slot></slot> </span>
-    <span v-else>
-      <Badge :dot="true">
-        <slot></slot>
-      </Badge>
-    </span>
-  </div>
+  <span>
+    <Badge :status="warning" :dot="!okay">
+      <slot></slot>
+    </Badge>
+  </span>
 </template>
 
 <script lang="ts">
 import { Badge } from "ant-design-vue";
-import { createComponent, reactive } from "@vue/composition-api";
+import { computed, createComponent } from "@vue/composition-api";
 
 export default createComponent({
   name: "DefaultLayout",
@@ -20,11 +17,8 @@ export default createComponent({
   },
   props: { okay: Boolean },
   setup(props) {
-    const state = reactive({
-      okay: props.okay,
-    });
-
-    return { state };
+    const warning = computed(() => (props.okay ? "" : "warning"));
+    return { warning };
   },
 });
 </script>
