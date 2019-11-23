@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
-import { projectName, companyName } from "@app/config/src/index.ts";
+import { projectName, companyName } from "@app/config/src/index.ts"; //! TODO: importing from *.ts is wrong, because compiled code still references the .ts file, which node cannot run. so this won't work in produciton
 import { computed, createComponent, reactive } from "@vue/composition-api";
 import Warn from "~/components/Warn.vue";
 
