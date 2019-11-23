@@ -34,7 +34,7 @@
     <Footer style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'">
       <div>
         <div>
-          Copyright &copy; {{ state.companyName }}. All rights reserved.
+          Copyright &copy; {{new Date().getFullYear()}} {{ state.companyName }}. All rights reserved.
           <span
             v-if="state.T_AND_C_URL"
           >
