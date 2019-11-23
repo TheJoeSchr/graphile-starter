@@ -9,34 +9,21 @@
           <h3>{{ state.title }} - {{ state.projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
-          <a-dropdown-button>
-            Dropdown
-            <a-menu slot="overlay">
-              <a-menu-item key="1"
-                ><a-icon type="user" />1st menu item</a-menu-item
-              >
-              <a-menu-item key="2"
-                ><a-icon type="user" />2nd menu item</a-menu-item
-              >
-              <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
-            </a-menu>
-          </a-dropdown-button>
-          <!-- <Dropdown :trigger="['click']">
+          <DropdownButton>
+            User
             <Menu slot="overlay">
               <MenuItem>
                 <NuxtLink to="/settings">
-                  Settings
-                  <!-- <a data-cy="layout-link-settings">
-                  <Warn okay="{data.currentUser.isVerified}">Settings</Warn>
-                </a>
+                  <Warn :okay="false">
+                    Settings
+                  </Warn>
                 </NuxtLink>
               </MenuItem>
               <MenuItem>
                 <a onClick="{handleLogout}">Logout</a>
               </MenuItem>
             </Menu>
-            <Button>User <Icon type="down" /> </Button>
-          </Dropdown> -->
+          </DropdownButton>
         </Col>
       </Row>
     </Header>
@@ -70,20 +57,23 @@
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
 import { projectName, companyName } from "@app/config";
 import { createComponent, reactive } from "@vue/composition-api";
+import Warn from "~/components/Warn.vue";
 
 export default createComponent({
   name: "DefaultLayout",
   components: {
-    Layout,
-    Header: Layout.Header,
     Avatar,
-    Row,
     Col,
     Dropdown,
+    DropdownButton: Dropdown.Button,
+    Header: Layout.Header,
     Icon,
+    Layout,
     Menu,
     MenuItem: Menu.Item,
+    Row,
     SubMenu: Menu.SubMenu,
+    Warn,
   },
   setup(_props, _ctx) {
     const state = reactive({
@@ -98,6 +88,13 @@ export default createComponent({
 });
 </script>
 <style lang="less" scoped>
+.ant-layout-header {
+  background: #fff;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 8px #f0f1f2;
+  z-index: 10;
+  max-width: 100%;
+}
 img {
   position: fixed;
   top: 20px;
