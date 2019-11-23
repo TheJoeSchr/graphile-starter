@@ -9,14 +9,12 @@
           <h3>{{ state.title }} - {{ state.projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
-          <DropdownButton>
+          <DropdownButton v-if="isLoggedIn">
             User
             <Menu slot="overlay">
               <MenuItem>
                 <NuxtLink to="/settings">
-                  <Warn :okay="false">
-                    Settings
-                  </Warn>
+                  <Warn :okay="false">Settings</Warn>
                 </NuxtLink>
               </MenuItem>
               <MenuItem>
@@ -24,19 +22,22 @@
               </MenuItem>
             </Menu>
           </DropdownButton>
+          <NLink v-if="!isLoggedIn" to="/login">
+            <a class="header-login-button">Sign in</a>
+          </NLink>
         </Col>
       </Row>
     </Header>
     <Content>
       <Nuxt />
     </Content>
-    <Footer
-      style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'"
-    >
+    <Footer style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'">
       <div>
         <div>
           Copyright &copy; {{ state.companyName }}. All rights reserved.
-          <span v-if="state.T_AND_C_URL">
+          <span
+            v-if="state.T_AND_C_URL"
+          >
             <a :href="state.T_AND_C_URL">Terms and conditions</a>
           </span>
         </div>
@@ -45,8 +46,7 @@
           <a
             style="color: '#fff', textDecoration: 'underline'"
             href="https://graphile.org/postgraphile"
-            >PostGraphile</a
-          >
+          >PostGraphile</a>
         </div>
       </div>
     </Footer>
@@ -56,7 +56,7 @@
 <script lang="ts">
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
 import { projectName, companyName } from "@app/config/src/index.ts";
-import { createComponent, reactive } from "@vue/composition-api";
+import { computed, createComponent, reactive } from "@vue/composition-api";
 import Warn from "~/components/Warn.vue";
 
 export default createComponent({
@@ -82,8 +82,9 @@ export default createComponent({
       companyName: companyName,
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
+    const isLoggedIn = computed(() => false);
 
-    return { state };
+    return { state, isLoggedIn };
   },
 });
 </script>
