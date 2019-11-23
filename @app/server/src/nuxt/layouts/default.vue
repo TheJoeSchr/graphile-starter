@@ -55,9 +55,10 @@
 
 <script lang="ts">
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
-import { projectName, companyName } from "@app/config/src/index.ts"; //! TODO: importing from *.ts is wrong, because compiled code still references the .ts file, which node cannot run. so this won't work in produciton
 import { computed, createComponent, reactive } from "@vue/composition-api";
 import Warn from "~/components/Warn.vue";
+//! importing is not working, because of `module: "commonjs"` in @app/config
+import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
 
 export default createComponent({
   name: "DefaultLayout",
