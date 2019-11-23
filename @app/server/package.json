@@ -33,7 +33,7 @@
     "@types/passport-github": "^1.1.5",
     "@types/pg": "^7.11.2",
     "@types/redis": "^2.8.14",
-    "@vue/composition-api": "^0.3.2",
+    "@vue/composition-api": "latest",
     "ant-design-vue": "^1.4.4",
     "chalk": "^3.0.0",
     "connect-pg-simple": "^6.0.1",
@@ -53,7 +53,6 @@
     "redis": "^2.8.0",
     "source-map-support": "^0.5.16",
     "subscriptions-transport-ws": "^0.9.16",
-    "vuex-class": "0.3.2",
     "ws": "^7.2.0"
   },
   "devDependencies": {
