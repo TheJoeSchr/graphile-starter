@@ -6,6 +6,7 @@
           <NuxtLink to="/">Home</NuxtLink>
         </Col>
         <Col>
+          <div>Manually Fetched Apollo Message "{{ currentUser.id }}"</div>
           <h3>{{ state.title }} - {{ state.projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
@@ -34,7 +35,8 @@
     <Footer style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'">
       <div>
         <div>
-          Copyright &copy; {{new Date().getFullYear()}} {{ state.companyName }}. All rights reserved.
+          Copyright &copy; {{ new Date().getFullYear() }}
+          {{ state.companyName }}. All rights reserved.
           <span
             v-if="state.T_AND_C_URL"
           >
@@ -55,10 +57,39 @@
 
 <script lang="ts">
 import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
-import { computed, createComponent, reactive } from "@vue/composition-api";
+import {
+  SetupContext,
+  computed,
+  createComponent,
+  reactive,
+  // ref,
+  // toRefs,
+} from "@vue/composition-api";
 import Warn from "~/components/Warn.vue";
 //! importing is not working, because of `module: "commonjs"` in @app/config
 import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
+import gql from "graphql-tag";
+import useQuery from "./../libs/useQuery";
+
+// declare function useQuery: useQuery;
+
+const SharedLayoutQuery = gql`
+  query SharedLayout {
+    currentUser {
+      id
+      ...SharedLayout_User
+    }
+  }
+
+  fragment SharedLayout_User on User {
+    id
+    name
+    username
+    avatarUrl
+    isAdmin
+    isVerified
+  }
+`;
 
 export default createComponent({
   name: "DefaultLayout",
@@ -76,7 +107,7 @@ export default createComponent({
     SubMenu: Menu.SubMenu,
     Warn,
   },
-  setup(_props, _ctx) {
+  setup(_props, ctx: SetupContext) {
     const state = reactive({
       title: "No title",
       projectName: projectName,
@@ -85,7 +116,11 @@ export default createComponent({
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
 
-    return { state };
+    const { state: currentUser } = <any>useQuery({
+      query: SharedLayoutQuery,
+      context: ctx,
+    });
+    return { state, currentUser };
   },
 });
 </script>

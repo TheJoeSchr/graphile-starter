@@ -52,13 +52,26 @@ export default {
     },
   },
   buildModules: ["@nuxt/typescript-build"],
-  modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile"],
+  modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile", "@nuxtjs/apollo"],
   plugins: ["~/plugins/composition-api"],
   axios: {},
+  // Give apollo module options
+  apollo: {
+    // required
+    clientConfigs: {
+      default: {
+        // required
+        httpEndpoint: "http://localhost:5678",
+        // optional
+        // override HTTP endpoint in browser only
+        browserHttpEndpoint: "/api/graphql",
+      },
+    },
+  },
   // TODO: import config from @app/config or similar
   postgraphile: {
     options: {
-      //appendPlugins: [PgSimplifyInflectorPlugin],
+      // appendPlugins: [PgSimplifyInflectorPlugin],
       graphiql: true,
       // Optional customisation
       graphileBuildOptions: {
@@ -66,16 +79,16 @@ export default {
          * Uncomment if you are using `simpleCollections: 'only'` and you never
          * want relay connections
          */
-        //pgOmitListSuffix: true,
+        // pgOmitListSuffix: true,
         /*
          * Uncomment if you want 'userPatch' instead of 'patch' in update
          * mutations.
          */
-        //pgSimplifyPatch: false,
+        // pgSimplifyPatch: false,
         /*
          * Uncomment if you want 'allUsers' instead of 'users' at root level.
          */
-        //pgSimplifyAllRows: false,
+        // pgSimplifyAllRows: false,
       },
     },
   },
