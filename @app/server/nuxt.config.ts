@@ -47,6 +47,9 @@ export default {
         }, */
       },
     },
+    babel: {
+      plugins: ["@babel/plugin-proposal-optional-chaining"],
+    },
   },
   buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile"],
