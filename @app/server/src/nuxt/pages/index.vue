@@ -8,19 +8,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-import { State } from "vuex-class";
-import { Person } from "~/types";
+import {
+  SetupContext,
+  createComponent,
+  reactive,
+  toRefs,
+} from "@vue/composition-api";
+
 import CustomCard from "~/components/CustomCard.vue";
 
-@Component({
+export default createComponent({
+  name: "People",
   components: {
     CustomCard,
   },
-})
-export default class extends Vue {
-  @State people!: Person;
-}
+  setup(_props, ctx: SetupContext) {
+    if (!ctx || !ctx.parent || !ctx.parent.$store.state) return {};
+
+    const state = reactive({
+      people: ctx.parent.$store.state.people,
+    });
+
+    return { ...toRefs(state) };
+  },
+});
 </script>
 
 <style scoped>

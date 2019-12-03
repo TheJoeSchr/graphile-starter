@@ -15,20 +15,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
-import { Person } from "~/types";
 import { Button, Card, Icon } from "ant-design-vue";
+import { Person } from "~/types";
+import { createComponent } from "@vue/composition-api";
+import { prop, createDefault } from "~/libs/propHelpers";
 
-@Component({
+export default createComponent({
+  name: "CustomCard",
   components: {
     Button,
     Card,
     Icon,
   },
-})
-export default class CustomCard extends Vue {
-  @Prop() person!: Person;
-}
+  // props: ({ person: Object } as any) as Props,
+  props: {
+    person: prop<Person>(Object, { required: true }),
+  },
+  setup(props) {
+    // let person = safeCast<Person>(props.person, defaultPerson());
+    const defaultPerson = createDefault<Person>({ id: 1 });
+    let proper = props.person ? props.person : defaultPerson;
+    return { proper };
+  },
+});
 </script>
 
 <style scoped>
