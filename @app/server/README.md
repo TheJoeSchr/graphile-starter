@@ -7,7 +7,7 @@ The server is responsible for:
   [PostGraphile](https://graphile.org/postgraphile/), based on database in
   `@app/db`)
 - server-side rendering (SSR) of the `@app/client` thanks to
-  [Next.js](https://nextjs.org/)
+  [Nuxt.js](https://typescript.nuxtjs.org/)
 
 The server does not perform background tasks such as sending emails, that is the
 responsibility of the job queue, which can be found in
@@ -15,10 +15,11 @@ responsibility of the job queue, which can be found in
 
 ## Entry point
 
-The entry point to the server is [src/index.ts](src/index.ts). This file sets up
-an HTTP server and installs our express app (defined in
-[src/app.ts](src/app.ts)) into it. The express app installs the middleware it
-needs from the src/middleware/\*.ts files.
+The entry point to the server is
+[./src/nuxt/modules/nuxt-postgraphile/index.ts](./src/nuxt/modules/nuxt-postgraphile/index.ts).
+This file hooks postgraphile into Nuxt.js already existing HTTP server (plugin
+configured in [nuxt.config.ts](nuxt.config.ts)) into it. The module installs the
+middleware it needs from the src/middleware/\*.ts files.
 
 ## Express getters
 
@@ -50,25 +51,22 @@ to fail to start when the previous one was killed, so we maintain a list of
 actions are called automatically when the process exits, or is interrupted with
 certain signals such as SIGINT from Ctrl-c.
 
-# graphile-starter
-
-> graphile starter using nuxt.js w/ TS
-
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
-$ npm install # Or yarn install
+$ yarn # Or yarn install
 
 # serve with hot reload at localhost:3000
-$ npm run dev
+$ yarn dev
 
 # build for production and launch server
-$ npm run build
-$ npm start
+$ yarn build
+$ yarn start
 
 # generate static project
-$ npm run generate
+$ yarn run generate
 ```
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+For detailed explanation on how things work, checkout the
+[Nuxt.js docs](https://github.com/nuxt/nuxt.js).
