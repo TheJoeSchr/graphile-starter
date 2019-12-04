@@ -26,3 +26,9 @@ echo "/root/.bashrc /root/.gitconfig /root/.ssh/config /root/.vimrc /root/.confi
 
 # Installs (n)vim plugins
 nvim +'PlugInstall --sync' +qa true
+
+# Setting for the new UTF-8 terminal support in TMUX
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+dpkg-reconfigure locales
