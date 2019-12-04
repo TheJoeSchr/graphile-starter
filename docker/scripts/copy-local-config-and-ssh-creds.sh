@@ -31,4 +31,6 @@ nvim +'PlugInstall --sync' +qa true
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-dpkg-reconfigure locales
+update-locale "LANG=en_US.UTF-8"
+locale-gen --purge "en_US.UTF-8"
+dpkg-reconfigure --frontend noninteractive locales
