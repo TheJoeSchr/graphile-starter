@@ -49,3 +49,26 @@ to fail to start when the previous one was killed, so we maintain a list of
 `shutdownActions` to cleanly close servers, sockets, files and the like. These
 actions are called automatically when the process exits, or is interrupted with
 certain signals such as SIGINT from Ctrl-c.
+
+# graphile-starter
+
+> graphile starter using nuxt.js w/ TS
+
+## Build Setup
+
+``` bash
+# install dependencies
+$ npm install # Or yarn install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).

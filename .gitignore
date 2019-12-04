@@ -6,5 +6,6 @@ dist
 /yarn-error.log
 /@app/e2e/cypress/videos
 /@app/graphql/index.*
+/@app/server/.nuxt/
 .agignore
 *.tsbuildinfo
