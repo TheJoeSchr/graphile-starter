@@ -257,11 +257,10 @@ async function updateDotenv(answers) {
   if (projectName) {
     add(
       "COMPOSE_PROJECT_NAME",
-      projectName,
+    projectName ? projectName : "", // at least set COMPOSE_PROJECT_NAME so it's easier to find/set manually later
       `\
 # The name of the folder you cloned graphile-starter to (so we can run docker-compose inside a container):`
-    );
-  }
+  );
 
   data = data.trim() + "\n";
 
