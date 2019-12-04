@@ -40,12 +40,14 @@ ARG TARGET
 COPY --from=builder /app/lerna.json /app/package.json /app/yarn.lock /app/
 COPY --from=builder /app/@app/config /app/@app/config
 COPY --from=builder /app/@app/db /app/@app/db
+COPY --from=builder /app/@app/graphql/ /app/@app/graphql/
 COPY --from=builder /app/@app/client/package.json /app/@app/client/package.json
 COPY --from=builder /app/@app/client/assets/ /app/@app/client/assets/
 COPY --from=builder /app/@app/client/src/next.config.js /app/@app/client/src/next.config.js
 COPY --from=builder /app/@app/$TARGET/package.json /app/@app/$TARGET/
 COPY --from=builder /app/@app/$TARGET/dist/ /app/@app/$TARGET/dist/
 COPY --from=builder /app/@app/client/.next /app/@app/client/.next
+COPY --from=builder /app/@app/server/postgraphile.tags.jsonc /app/@app/server/
 
 # Shared args shouldn't be overridable at runtime (because they're baked into
 # the built JS).

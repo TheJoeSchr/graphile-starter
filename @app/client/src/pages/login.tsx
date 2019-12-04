@@ -23,6 +23,7 @@ import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
 import Redirect from "../components/Redirect";
 import SocialLoginOptions from "../components/SocialLoginOptions";
+import { resetWebsocketConnection } from "../lib/withApollo";
 
 const { Paragraph } = Typography;
 
@@ -127,7 +128,7 @@ function LoginForm({
   error,
   setError,
 }: LoginFormProps) {
-  const [login] = useLoginMutation();
+  const [login] = useLoginMutation({});
   const client = useApolloClient();
   const validateFields: (
     fieldNames?: Array<string>,
@@ -150,6 +151,7 @@ function LoginForm({
           },
         });
         // Success: refetch
+        resetWebsocketConnection();
         client.resetStore();
         Router.push(onSuccessRedirectTo);
       } catch (e) {
