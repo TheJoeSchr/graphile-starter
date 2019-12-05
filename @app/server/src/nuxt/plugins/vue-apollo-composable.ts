@@ -1,16 +1,12 @@
 import { DefaultApolloClient } from "@vue/apollo-composable";
-import { provide } from "@vue/composition-api";
+// import { provide } from "@vue/composition-api";
 // import Vue from "vue";
 
 export default (ctx, _inject) => {
-  return {
-    setup() {
-      debugger;
-      // const defaultClient = DefaultApolloClient.toString();
-      const apolloClient = ctx.app.apolloProvider.defaultClient;
-      ctx.app.provide(DefaultApolloClient, apolloClient);
-    },
-  };
+  debugger;
+  // const defaultClient = DefaultApolloClient.toString();
+  const apolloClient = ctx.app.apolloProvider.defaultClient;
+  ctx.app.provide(DefaultApolloClient, apolloClient);
 };
 
 /* export default (outside, inject) => {

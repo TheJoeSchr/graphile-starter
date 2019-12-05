@@ -67,13 +67,11 @@ import {
   // ref,
   // toRefs,
 } from "@vue/composition-api";
-import Warn from "~/components/Warn.vue";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 //! importing is not working, because of `module: "commonjs"` in @app/config
 import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
-import gql from "graphql-tag";
-import useQuery from "./../libs/useQuery";
-
-// declare function useQuery: useQuery;
+import Warn from "~/components/Warn.vue";
 
 const SharedLayoutQuery = gql`
   query SharedLayout {
@@ -120,7 +118,8 @@ export default createComponent({
 
     const { result } = useQuery(SharedLayoutQuery);
 
-    const currentUsers = result ? result.users : null;
+    debugger;
+    const currentUsers = result.value ? result.value.users : null;
     return { state, currentUsers };
   },
 });

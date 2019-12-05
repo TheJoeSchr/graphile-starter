@@ -53,7 +53,7 @@ export default {
   },
   buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile", "@nuxtjs/apollo"],
-  plugins: ["~/plugins/composition-api"],
+  plugins: ["~/plugins/composition-api", "~/plugins/vue-apollo-composable"],
   axios: {},
   // Give apollo module options
   apollo: {
