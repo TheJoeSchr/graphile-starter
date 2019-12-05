@@ -6,7 +6,9 @@
           <NuxtLink to="/">Home</NuxtLink>
         </Col>
         <Col>
-          <div>Manually Fetched Apollo Message "{{ currentUser.id }}"</div>
+          <ul v-if="currentUsers">
+            <li v-for="user of currentUsers" :key="user.id">{{ user.id }} {{ user.username }}</li>
+          </ul>
           <h3>{{ state.title }} - {{ state.projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
@@ -107,7 +109,7 @@ export default createComponent({
     SubMenu: Menu.SubMenu,
     Warn,
   },
-  setup(_props, ctx: SetupContext) {
+  setup(_props, _ctx: SetupContext) {
     const state = reactive({
       title: "No title",
       projectName: projectName,
@@ -116,11 +118,10 @@ export default createComponent({
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
 
-    const { state: currentUser } = <any>useQuery({
-      query: SharedLayoutQuery,
-      context: ctx,
-    });
-    return { state, currentUser };
+    const { result } = useQuery(SharedLayoutQuery);
+
+    const currentUsers = result ? result.users : null;
+    return { state, currentUsers };
   },
 });
 </script>

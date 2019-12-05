@@ -188,11 +188,6 @@ type ForgotPasswordPayload {
   query: Query
 }
 
-"""
-The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar JSON
-
 input LoginInput {
   password: String!
   username: String!
@@ -413,10 +408,8 @@ type Query {
   query: Query!
   user(id: Int!): User
   userAuthentication(id: Int!): UserAuthentication
-  userAuthenticationByServiceAndIdentifier(identifier: String!, service: String!): UserAuthentication
   userByUsername(username: String!): User
   userEmail(id: Int!): UserEmail
-  userEmailByUserIdAndEmail(email: String!, userId: Int!): UserEmail
 }
 
 input RegisterInput {
@@ -628,9 +621,6 @@ Contains information about the login providers this user has used, so that they 
 """
 type UserAuthentication {
   createdAt: Datetime!
-
-  """Additional profile details extracted from this login method"""
-  details: JSON!
   id: Int!
 
   """A unique identifier for the user within the login service."""
