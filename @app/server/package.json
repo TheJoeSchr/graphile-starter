@@ -21,7 +21,7 @@
     "@nuxt/types": "latest",
     "@nuxt/typescript-runtime": "latest",
     "@nuxt/vue-app": "^2.10.2",
-    "@nuxtjs/apollo": "^4.0.0",
+    "@nuxtjs/apollo": "^4.0.0-rc9",
     "@nuxtjs/axios": "latest",
     "@types/chalk": "^2.2.0",
     "@types/connect-pg-simple": "^4.2.0",
