@@ -6,13 +6,14 @@
           <NuxtLink to="/">Home</NuxtLink>
         </Col>
         <Col>
-          <ul v-if="currentUsers">
-            <li v-for="user of currentUsers" :key="user.id">{{ user.id }} {{ user.username }}</li>
+          <div v-if="loading">Loading...</div>
+          <ul v-else-if="currentUser">
+            <li>{{ currentUser.id }} {{ currentUser.username }}</li>
           </ul>
-          <h3>{{ state.title }} - {{ state.projectName }}</h3>
+          <h3>{{ title }} - {{ projectName }}</h3>
         </Col>
         <Col span="6" style="textAlign: right">
-          <DropdownButton v-if="state.isLoggedIn">
+          <DropdownButton v-if="isLoggedIn">
             User
             <Menu slot="overlay">
               <MenuItem>
@@ -25,7 +26,7 @@
               </MenuItem>
             </Menu>
           </DropdownButton>
-          <NLink v-if="!state.isLoggedIn" to="/login">
+          <NLink v-if="!isLoggedIn" to="/login">
             <a class="header-login-button">Sign in</a>
           </NLink>
         </Col>
@@ -38,11 +39,11 @@
       <div>
         <div>
           Copyright &copy; {{ new Date().getFullYear() }}
-          {{ state.companyName }}. All rights reserved.
+          {{ companyName }}. All rights reserved.
           <span
-            v-if="state.T_AND_C_URL"
+            v-if="T_AND_C_URL"
           >
-            <a :href="state.T_AND_C_URL">Terms and conditions</a>
+            <a :href="T_AND_C_URL">Terms and conditions</a>
           </span>
         </div>
         <div>
@@ -64,11 +65,14 @@ import {
   computed,
   createComponent,
   reactive,
-  // ref,
-  // toRefs,
-  provide,
+  // watch,
+  // provide,
+  toRefs,
 } from "@vue/composition-api";
-import { useQuery, ApolloClients } from "@vue/apollo-composable";
+import {
+  useQuery,
+  useResult /* , ApolloClients  */,
+} from "@vue/apollo-composable";
 import gql from "graphql-tag";
 //! importing is not working, because of `module: "commonjs"` in @app/config
 import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
@@ -108,9 +112,8 @@ export default createComponent({
     SubMenu: Menu.SubMenu,
     Warn,
   },
-  setup(_props, context: SetupContext) {
-    provide(ApolloClients, { default: (<any>context.root).$apollo });
-
+  setup(_props, _context: SetupContext) {
+    const { result } = useQuery(SharedLayoutQuery);
     const state = reactive({
       title: "No title",
       projectName: projectName,
@@ -118,13 +121,9 @@ export default createComponent({
       isLoggedIn: computed(() => false),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
+    const currentUser = useResult(result, null, data => data.currentUser);
 
-    debugger;
-    const { result: currentUsers } = useQuery(SharedLayoutQuery);
-    console.log(currentUsers);
-
-    // const currentUsers = result.value ? result.value.users : null;
-    return { state, currentUsers };
+    return { currentUser, ...toRefs(state) };
   },
 });
 </script>
