@@ -66,8 +66,9 @@ import {
   reactive,
   // ref,
   // toRefs,
+  provide,
 } from "@vue/composition-api";
-import { useQuery } from "@vue/apollo-composable";
+import { useQuery, ApolloClients } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 //! importing is not working, because of `module: "commonjs"` in @app/config
 import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
@@ -107,7 +108,9 @@ export default createComponent({
     SubMenu: Menu.SubMenu,
     Warn,
   },
-  setup(_props, _ctx: SetupContext) {
+  setup(_props, context: SetupContext) {
+    provide(ApolloClients, { default: (<any>context.root).$apollo });
+
     const state = reactive({
       title: "No title",
       projectName: projectName,
@@ -116,10 +119,11 @@ export default createComponent({
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
 
-    const { result } = useQuery(SharedLayoutQuery);
-
     debugger;
-    const currentUsers = result.value ? result.value.users : null;
+    const { result: currentUsers } = useQuery(SharedLayoutQuery);
+    console.log(currentUsers);
+
+    // const currentUsers = result.value ? result.value.users : null;
     return { state, currentUsers };
   },
 });
