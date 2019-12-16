@@ -69,12 +69,11 @@ import {
   // provide,
   toRefs,
 } from "@vue/composition-api";
-import {
-  useQuery,
-  useResult /* , ApolloClients  */,
-} from "@vue/apollo-composable";
+import { useQuery, useResult } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import Warn from "~/components/Warn.vue";
+import { User } from "@app/graphql";
+import { safeCast } from "../../utils/propHelpers";
 
 const SharedLayoutQuery = gql`
   query SharedLayout {
@@ -112,10 +111,10 @@ export default createComponent({
   },
   setup(_props, _context: SetupContext) {
     const { result, loading } = useQuery(SharedLayoutQuery);
-    const currentUser = useResult(result, null, data => data.currentUser);
-    /*     const currentUser = <User>(
-      (<unknown>useResult(result, null, data => data.currentUser))
-    ); */
+    // const currentUser = useResult(result, null, data => data.currentUser);
+    const currentUser = safeCast<User>(
+      useResult(result, null, data => data.currentUser)
+    );
 
     const state = reactive({
       projectName: process.env.projectName,
@@ -124,6 +123,7 @@ export default createComponent({
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
     return {
+      result,
       currentUser,
       loading,
       ...toRefs(state),

@@ -18,7 +18,7 @@
 import { Button, Card, Icon } from "ant-design-vue";
 import { Person } from "~/types";
 import { createComponent } from "@vue/composition-api";
-import { prop, createDefault } from "~/libs/propHelpers";
+import { prop, createDefault } from "~/../utils/propHelpers";
 
 export default createComponent({
   name: "CustomCard",

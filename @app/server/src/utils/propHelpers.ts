@@ -35,28 +35,32 @@ export const createDefault = <T>(o: any): T => <T>o;
  * @param type to be casted
  * @param defaultObject use this if type is undefined
  */
-/*
-interface IConstructor<T> {
-  // enforce default constructor
-  new (): T;
-}
- function NewType<T>(newtype: IConstructor<T>): T {
-  const Newtype = newtype;
-  return new Newtype();
-} */
 export const safeCast = <T>(type: any, defaultObject?: T): T => {
-  // type is defined, all is A ok
-  if (typeof type !== "undefined") return <T>type;
-  // at least we have a default
-  // const crappyDefault = () => {
-  //   return {};
-  // };
-  return <T>defaultObject; // ?? crappyDefault();
+  switch(typeof type ) {
+    case "undefined": {
+      // at least we have a default
+      const crappyDefault = () => { return {}; };
+      return <T>(defaultObject ?? crappyDefault());
+    }
+    // type is defined, all is A ok
+    default: {
+        return <T>(<unknown>type);
+    }
+  }
   /*   else if (defaultObject) return <T>defaultObject;
-  // try to cast with just new()
   else {
-    // const TCreator: { new (...args: any[]): T } = { new(...args: any[]): T; };
-    // return new NewType();
-    // return NewType<T>({});
-  } */
+    // try to cast with just new()
+    interface IConstructor<T> {
+      // enforce default constructor
+      new (): T;
+    }
+    function NewType<T>(newtype: IConstructor<T>): T {
+      const Newtype = newtype;
+      return new Newtype();
+    }
+    const TCreator: { new (...args: any[]): T } = { new(...args: any[]): T; };
+    return new NewType();
+    return NewType<T>({});
+  }
+  */
 };
