@@ -7,7 +7,7 @@
         </Col>
         <Col>
           <div v-if="loading">Loading...</div>
-          <ul v-else-if="currentUser">
+          <ul v-else-if="result.currentUser">
             <li>{{ currentUser.id }} {{ currentUser.username }}</li>
           </ul>
           <h3>{{ title }} - {{ projectName }}</h3>
@@ -121,9 +121,9 @@ export default createComponent({
       isLoggedIn: computed(() => false),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
-    const currentUser = useResult(result, null, data => data.currentUser);
+    // const currentUser = useResult(result, null, data => data.currentUser);
 
-    return { currentUser, ...toRefs(state) };
+    return { result };
   },
 });
 </script>
