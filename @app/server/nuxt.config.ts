@@ -1,4 +1,6 @@
+// import { projectName, companyName } from './../config/src/index';
 import path from "path";
+import { projectName, companyName } from "@app/config"; //! imported here because it otherwise complains about not finding it and also overwrits gql query results
 export default {
   modulesDir: [
     path.resolve(__dirname, "../../node_modules/"),
@@ -9,7 +11,10 @@ export default {
     host: "0.0.0.0", // default: localhost
   },
   srcDir: "src/nuxt",
-  env: {},
+  env: {
+    projectName: projectName || "",
+    companyName: companyName || "",
+  },
   head: {
     title: "graphile-starter",
     meta: [

@@ -5,6 +5,9 @@
         <Col span="6">
           <NuxtLink to="/">Home</NuxtLink>
         </Col>
+        <Col>
+          <h3>{{ projectName }}</h3>
+        </Col>
         <Col span="6" style="textAlign: right">
           <p v-if="loading" to="/login"></p>
           <template v-else>
@@ -25,9 +28,6 @@
               <a class="header-login-button">Sign in</a>
             </NLink>
           </template>
-        </Col>
-        <Col>
-          <h3>{{ title }} - {{ projectName }}</h3>
         </Col>
       </Row>
     </Header>
@@ -67,7 +67,6 @@ import {
   reactive,
   // watch,
   // provide,
-  ref,
   toRefs,
 } from "@vue/composition-api";
 import {
@@ -75,8 +74,6 @@ import {
   useResult /* , ApolloClients  */,
 } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-//! importing is not working, because of `module: "commonjs"` in @app/config
-import { projectName, companyName } from "@app/config"; // TODO: figure out how to properly import without throwing uncaught reference error about "export"
 import Warn from "~/components/Warn.vue";
 
 const SharedLayoutQuery = gql`
@@ -116,12 +113,13 @@ export default createComponent({
   setup(_props, _context: SetupContext) {
     const { result, loading } = useQuery(SharedLayoutQuery);
     const currentUser = useResult(result, null, data => data.currentUser);
+    /*     const currentUser = <User>(
+      (<unknown>useResult(result, null, data => data.currentUser))
+    ); */
 
     const state = reactive({
-      title: "No title",
-      //! commented out because it somehow overwrites result/currentUser
-      // projectName,
-      // companyName,
+      projectName: process.env.projectName,
+      companyName: process.env.companyName,
       isLoggedIn: computed(() => (currentUser ? true : false)),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
