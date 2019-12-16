@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "yarn build:essential",
-    "build:essential": "yarn nuxt-ts:env build",
+    "build": "yarn nuxt-ts:env build",
+    "build:essential": "echo \"No pre-build needed for nuxt-ts\"",
     "dev": "yarn nuxt-ts:env:debug dev",
     "start": "yarn nuxt-ts:env start",
     "generate": "yarn nuxt-ts:env generate",
