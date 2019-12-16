@@ -5,44 +5,43 @@
         <Col span="6">
           <NuxtLink to="/">Home</NuxtLink>
         </Col>
-        <Col>
-          <div v-if="loading">Loading...</div>
-          <ul v-else-if="result.currentUser">
-            <li>{{ currentUser.id }} {{ currentUser.username }}</li>
-          </ul>
-          <h3>{{ title }} - {{ projectName }}</h3>
-        </Col>
         <Col span="6" style="textAlign: right">
-          <DropdownButton v-if="isLoggedIn">
-            User
-            <Menu slot="overlay">
-              <MenuItem>
-                <NuxtLink to="/settings">
-                  <Warn :okay="false">Settings</Warn>
-                </NuxtLink>
-              </MenuItem>
-              <MenuItem>
-                <a onClick="{handleLogout}">Logout</a>
-              </MenuItem>
-            </Menu>
-          </DropdownButton>
-          <NLink v-if="!isLoggedIn" to="/login">
-            <a class="header-login-button">Sign in</a>
-          </NLink>
+          <p v-if="loading" to="/login"></p>
+          <template v-else>
+            <DropdownButton v-if="isLoggedIn && currentUser">
+              User: {{ currentUser.username }}
+              <Menu slot="overlay">
+                <MenuItem>
+                  <NuxtLink to="/settings">
+                    <Warn :okay="false">Settings</Warn>
+                  </NuxtLink>
+                </MenuItem>
+                <MenuItem>
+                  <a onClick="{handleLogout}">Logout</a>
+                </MenuItem>
+              </Menu>
+            </DropdownButton>
+            <NLink v-if="!isLoggedIn" to="/login">
+              <a class="header-login-button">Sign in</a>
+            </NLink>
+          </template>
+        </Col>
+        <Col>
+          <h3>{{ title }} - {{ projectName }}</h3>
         </Col>
       </Row>
     </Header>
     <Content>
       <Nuxt />
     </Content>
-    <Footer style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'">
+    <Footer
+      style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'"
+    >
       <div>
         <div>
-          Copyright &copy; {{ new Date().getFullYear() }}
-          {{ companyName }}. All rights reserved.
-          <span
-            v-if="T_AND_C_URL"
-          >
+          Copyright &copy; {{ new Date().getFullYear() }} {{ companyName }}. All
+          rights reserved.
+          <span v-if="T_AND_C_URL">
             <a :href="T_AND_C_URL">Terms and conditions</a>
           </span>
         </div>
@@ -51,7 +50,8 @@
           <a
             style="color: '#fff', textDecoration: 'underline'"
             href="https://graphile.org/postgraphile"
-          >PostGraphile</a>
+            >PostGraphile</a
+          >
         </div>
       </div>
     </Footer>
@@ -67,6 +67,7 @@ import {
   reactive,
   // watch,
   // provide,
+  ref,
   toRefs,
 } from "@vue/composition-api";
 import {
@@ -113,17 +114,22 @@ export default createComponent({
     Warn,
   },
   setup(_props, _context: SetupContext) {
-    const { result } = useQuery(SharedLayoutQuery);
+    const { result, loading } = useQuery(SharedLayoutQuery);
+    const currentUser = useResult(result, null, data => data.currentUser);
+
     const state = reactive({
       title: "No title",
-      projectName: projectName,
-      companyName: companyName,
-      isLoggedIn: computed(() => false),
+      //! commented out because it somehow overwrites result/currentUser
+      // projectName,
+      // companyName,
+      isLoggedIn: computed(() => (currentUser ? true : false)),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
-    // const currentUser = useResult(result, null, data => data.currentUser);
-
-    return { result };
+    return {
+      currentUser,
+      loading,
+      ...toRefs(state),
+    };
   },
 });
 </script>
