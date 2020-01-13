@@ -20,7 +20,13 @@
       "@app/*": ["./../../@app/*"], // let's nuxt find @app packages
       "~/*": ["./src/nuxt/*"] // for nuxt:typecheck
     },
-    "types": ["@nuxt/types", "@types/node", "@nuxt/vue-app", "@nuxtjs/apollo"]
+    "types": [
+      "@nuxt/types",
+      "@types/node",
+      "@nuxt/vue-app",
+      "@nuxtjs/apollo",
+      "@nuxtjs/vuetify"
+    ]
   },
   "exclude": ["__tests__"]
 }

@@ -4311,6 +4311,11 @@
   dependencies:
     tslib "^1.9.3"
 
+"@vuetify/cli-plugin-utils@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@vuetify/cli-plugin-utils/-/cli-plugin-utils-0.0.4.tgz#1c5cc2459b890373acdab65b861e2e754516b08f"
+  integrity sha512-iCrAy6NT3Xp76YSuW8Q0pgb3LD7wocrZQr9kTIdQZjgysie1kkRjV3gCCrkcXALibidLmclj/7SfoFE3h27hlw==
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"
@@ -17340,6 +17345,13 @@ vue-cli-plugin-apollo@^0.21.0:
     nodemon "^1.19.4"
     subscriptions-transport-ws "^0.9.16"
     ts-node "^8.4.1"
+
+vue-cli-plugin-vuetify-preset-reply@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify-preset-reply/-/vue-cli-plugin-vuetify-preset-reply-1.0.1.tgz#56a8b0822bcc17974d19e53e692cbfb4e3d82171"
+  integrity sha512-wl3i3KCYlN9sJ0bLns9pcz7PZMuomuZ1ouU8ngOPz1fFWzyJKkY25FBUIGbULt9WE88Trc5X4n7n5tQXwx4cyg==
+  dependencies:
+    "@vuetify/cli-plugin-utils" "^0.0.4"
 
 vue-client-only@^2.0.0:
   version "2.0.0"

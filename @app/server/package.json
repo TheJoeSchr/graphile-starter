@@ -80,6 +80,7 @@
     "babel-plugin-import": "^1.12.2",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "vue-cli-plugin-vuetify-preset-reply": "^1.0.1"
   }
 }
