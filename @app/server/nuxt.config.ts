@@ -56,7 +56,7 @@ export default {
       plugins: ["@babel/plugin-proposal-optional-chaining","@babel/plugin-proposal-nullish-coalescing-operator"],
     },
   },
-  buildModules: ["@nuxt/typescript-build"],
+  buildModules: ["@nuxt/typescript-build",  "@nuxtjs/vuetify",],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile", "@nuxtjs/apollo"],
   plugins: ["~/plugins/composition-api","~/plugins/provide-apollo-client"],
   axios: {},
@@ -103,4 +103,10 @@ export default {
       devtools: true,
     },
   },
+    // Doc: https://github.com/nuxt-community/vuetify-module
+  vuetify: {
+    customVariables: ["./src/assets/variables.scss"],
+    optionsPath: "./src/vuetify.options.js",
+    treeShake: true,
+  }
 };
