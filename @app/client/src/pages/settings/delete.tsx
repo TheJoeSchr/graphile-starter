@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
-import SettingsLayout from "../../components/SettingsLayout";
-import { H3, P } from "../../components/Text";
+import SettingsLayout from "../../layout/SettingsLayout";
+import { NextPage } from "next";
+import { H3, P, ErrorAlert } from "@app/components";
 import { Alert, Button, Modal, Typography } from "antd";
-import ErrorAlert from "../../components/ErrorAlert";
 import { ApolloError } from "apollo-client";
 import {
   useRequestAccountDeletionMutation,
@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 
 const { Text } = Typography;
 
-export default function Settings_Accounts() {
+const Settings_Accounts: NextPage = () => {
   const router = useRouter();
   const token: string | null =
     (router && router.query && !Array.isArray(router.query.token)
@@ -179,4 +179,6 @@ export default function Settings_Accounts() {
       </Modal>
     </SettingsLayout>
   );
-}
+};
+
+export default Settings_Accounts;

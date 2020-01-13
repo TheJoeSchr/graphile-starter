@@ -7,7 +7,8 @@ import React, {
   useMemo,
 } from "react";
 import { promisify } from "util";
-import SharedLayout from "../components/SharedLayout";
+import SharedLayout from "../layout/SharedLayout";
+import { NextPage } from "next";
 import Link from "next/link";
 import { Form, Icon, Input, Button, Alert } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
@@ -15,14 +16,16 @@ import { useForgotPasswordMutation } from "@app/graphql";
 import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
 
-export default function ForgotPassword() {
+const ForgotPassword: NextPage = () => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   return (
     <SharedLayout title="Forgot Password">
       <WrappedForgotPasswordForm error={error} setError={setError} />
     </SharedLayout>
   );
-}
+};
+
+export default ForgotPassword;
 
 interface FormValues {
   email: string;
@@ -39,7 +42,7 @@ function ForgotPasswordForm({
   setError,
 }: ForgotPasswordFormProps) {
   const [forgotPassword] = useForgotPasswordMutation();
-  const [success, setSuccess] = useState(false);
+  const [successfulEmail, setSuccessfulEmail] = useState<string | null>(null);
 
   const validateFields: (
     fieldNames?: Array<string>,
@@ -55,13 +58,14 @@ function ForgotPasswordForm({
       setError(null);
       try {
         const values = await validateFields();
+        const email = values.email;
         await forgotPassword({
           variables: {
-            email: values.email,
+            email,
           },
         });
         // Success: refetch
-        setSuccess(true);
+        setSuccessfulEmail(email);
       } catch (e) {
         setError(e);
       }
@@ -82,12 +86,12 @@ function ForgotPasswordForm({
 
   const code = getCodeFromError(error);
 
-  if (success) {
+  if (successfulEmail != null) {
     return (
       <Alert
         type="success"
         message="You've got mail"
-        description="We've sent you an email reset link; click the link and follow the instructions"
+        description={`We've sent an email reset link to '${successfulEmail}'; click the link and follow the instructions. If you don't receive the link, please ensure you entered the email address correctly, and check in your spam folder just in case.`}
       />
     );
   }

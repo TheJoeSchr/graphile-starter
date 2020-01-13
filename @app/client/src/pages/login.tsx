@@ -10,8 +10,8 @@ import SharedLayout, {
   Row,
   Col,
   SharedLayoutChildProps,
-} from "../components/SharedLayout";
-import { NextPageContext } from "next";
+} from "../layout/SharedLayout";
+import { NextPage } from "next";
 import Link from "next/link";
 import { Form, Icon, Input, Button, Alert, Typography } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
@@ -21,8 +21,7 @@ import { useLoginMutation } from "@app/graphql";
 import Router from "next/router";
 import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
-import Redirect from "../components/Redirect";
-import SocialLoginOptions from "../components/SocialLoginOptions";
+import { Redirect, SocialLoginOptions } from "@app/components";
 import { resetWebsocketConnection } from "../lib/withApollo";
 
 const { Paragraph } = Typography;
@@ -32,17 +31,17 @@ function hasErrors(fieldsError: Object) {
 }
 
 interface LoginProps {
-  next?: string;
+  next: string | null;
 }
 
-function isSafe(nextUrl: string | void | null) {
+function isSafe(nextUrl: string | null) {
   return (nextUrl && nextUrl[0] === "/") || false;
 }
 
 /**
  * Login page just renders the standard layout and embeds the login form
  */
-export default function Login({ next: rawNext }: LoginProps) {
+const Login: NextPage<LoginProps> = ({ next: rawNext }) => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   const [showLogin, setShowLogin] = useState<boolean>(false);
   const next: string = isSafe(rawNext) ? rawNext! : "/";
@@ -101,13 +100,13 @@ export default function Login({ next: rawNext }: LoginProps) {
       }
     </SharedLayout>
   );
-}
-
-Login.getInitialProps = ({ query }: NextPageContext) => {
-  return {
-    next: query.next,
-  };
 };
+
+Login.getInitialProps = async ({ query }) => ({
+  next: typeof query.next === "string" ? query.next : null,
+});
+
+export default Login;
 
 interface FormValues {
   username: string;
@@ -160,7 +159,7 @@ function LoginForm({
           form.setFields({
             password: {
               value: form.getFieldValue("password"),
-              errors: [new Error("Incorrect username or password")],
+              errors: [new Error("Incorrect username or passphrase")],
             },
           });
         } else {
@@ -208,19 +207,19 @@ function LoginForm({
         help={passwordError || ""}
       >
         {getFieldDecorator("password", {
-          rules: [{ required: true, message: "Please input your Password" }],
+          rules: [{ required: true, message: "Please input your passphrase" }],
         })(
           <Input
             prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
             size="large"
             type="password"
-            placeholder="Password"
+            placeholder="Passphrase"
             data-cy="loginpage-input-password"
           />
         )}
 
         <Link href="/forgot">
-          <a>Forgotten password?</a>
+          <a>Forgotten passphrase?</a>
         </Link>
       </Form.Item>
 
