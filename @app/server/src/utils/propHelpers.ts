@@ -35,12 +35,23 @@ export const createDefault = <T>(o: any): T => <T>o;
  * @param type to be casted
  * @param defaultObject use this if type is undefined
  */
-export const safeCast = <T>(type: any, defaultObject?: T): T => {
+export class SafeCastError {
+  constructor(private _error: string, private _stack?: string) {}
+
+  public error(): string {
+    return this._error;
+  }
+
+  public stack(): string | undefined {
+    return this._stack;
+  }
+}
+export const safeCast = <T>(type: any, defaultObject?: T): T|SafeCastError => {
   switch(typeof type ) {
     case "undefined": {
       // at least we have a default
-      const crappyDefault = () => { return {}; };
-      return <T>(defaultObject ?? crappyDefault());
+      const safeCastError= () => { return new SafeCastError("safeCast(type:undefined): no `defaultObject` given" ); };
+      return <T>(defaultObject ?? safeCastError());
     }
     // type is defined, all is A ok
     default: {
@@ -64,3 +75,14 @@ export const safeCast = <T>(type: any, defaultObject?: T): T => {
   }
   */
 };
+
+// console.log(123455);
+// let test="test";
+// let echo = safeCast<number>(test)
+// if ( echo instanceof SafeCastError){
+//   console.log("Error");
+//   console.log(echo.error());
+//   return
+// }
+
+// console.log(echo);
