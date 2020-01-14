@@ -105,8 +105,8 @@ export default {
   },
     // Doc: https://github.com/nuxt-community/vuetify-module
   vuetify: {
-    customVariables: ["./src/assets/variables.scss"],
-    optionsPath: "./src/vuetify.options.js",
+    customVariables: ["~/assets/variables.scss"],
+    optionsPath: "~/vuetify.options.js",
     treeShake: true,
   }
 };

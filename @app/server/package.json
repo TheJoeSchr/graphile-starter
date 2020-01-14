@@ -74,6 +74,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.4",
+    "@mdi/font": "^4.7.95",
     "@nuxt/typescript-build": "^0.5.1",
     "@nuxtjs/vuetify": "^1.10.0",
     "babel-eslint": "^10.0.3",
