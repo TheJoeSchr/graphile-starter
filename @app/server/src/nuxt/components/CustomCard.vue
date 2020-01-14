@@ -1,17 +1,7 @@
-<template>
-  <card class="card">
-    <img
-      :src="
-        'https://robohash.org/' + person.first_name + '_' + person.last_name
-      "
-    />
-    <template class="ant-card-actions" slot="actions">
-      <icon type="like" />
-      <icon type="edit" />
-      <icon type="ellipsis" />
-    </template>
-    <!-- <Button>I like it!</Button> -->
-  </card>
+<template lang="pug">
+  card.card
+    img(:src='\'https://robohash.org/\' + person.first_name + \'_\' + person.last_name')
+    template.ant-card-actions(slot='actions')
 </template>
 
 <script lang="ts">
