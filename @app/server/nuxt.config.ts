@@ -58,7 +58,7 @@ export default {
   },
   buildModules: ["@nuxt/typescript-build",  "@nuxtjs/vuetify",],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile", "@nuxtjs/apollo"],
-  plugins: ["~/plugins/composition-api","~/plugins/provide-apollo-client", "~/plugins/vuetify-preset"],
+  plugins: ["~/plugins/composition-api","~/plugins/provide-apollo-client"],
   axios: {},
   // Give apollo module options
   apollo: {
