@@ -1,9 +1,6 @@
-<template>
-  <span>
-    <v-badge :value="shouldWarn" :color="warning" dot>
-      <slot></slot>
-    </v-badge>
-  </span>
+<template lang="pug">
+  v-badge(:value='shouldWarn' :color='warning' dot)
+    slot
 </template>
 
 <script lang="ts">
