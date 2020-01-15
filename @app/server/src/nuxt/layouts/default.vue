@@ -1,65 +1,79 @@
 <template>
-  <Layout>
-    <Header>
-      <Row type="flex" justify="space-between">
-        <Col span="6">
-          <NuxtLink to="/">Home</NuxtLink>
-        </Col>
-        <Col>
-          <h3>{{ projectName }}</h3>
-        </Col>
-        <Col span="6" style="textAlign: right">
-          <p v-if="loading" to="/login"></p>
-          <template v-else>
-            <DropdownButton v-if="isLoggedIn && currentUser">
-              User: {{ currentUser.username }}
-              <Menu slot="overlay">
-                <MenuItem>
-                  <NuxtLink to="/settings">
-                    <Warn :okay="false">Settings</Warn>
-                  </NuxtLink>
-                </MenuItem>
-                <MenuItem>
-                  <a onClick="{handleLogout}">Logout</a>
-                </MenuItem>
-              </Menu>
-            </DropdownButton>
-            <NLink v-if="!isLoggedIn" to="/login">
-              <a class="header-login-button">Sign in</a>
-            </NLink>
-          </template>
-        </Col>
-      </Row>
-    </Header>
-    <Content>
-      <Nuxt />
-    </Content>
-    <Footer
-      style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'"
+  <v-app>
+    <v-app-bar
+      short
+      dense
+      dark
+      elevate-on-scroll
+      src="https://picsum.photos/1920/1080?random"
+      fade-img-on-scroll
+      scroll-target="#scrolling-techniques-4"
     >
-      <div>
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+        ></v-img>
+      </template>
+
+      <v-spacer></v-spacer>
+      <v-toolbar-title>Title</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn icon color="yellow" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item v-for="(item, i) in [{ title: 'menu list' }]" :key="i">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+    <v-sheet id="scrolling-techniques-4" class="overflow-y-auto">
+      <v-container>
+        <Nuxt />
+      </v-container>
+    </v-sheet>
+
+    <v-footer absolute class="font-weight-medium">
+      <v-col class="text-center" cols="12">
         <div>
-          Copyright &copy; {{ new Date().getFullYear() }} {{ companyName }}. All
-          rights reserved.
-          <span v-if="T_AND_C_URL">
-            <a :href="T_AND_C_URL">Terms and conditions</a>
-          </span>
+          <div>
+            Copyright &copy; {{ new Date().getFullYear() }} {{ companyName }}.
+            All rights reserved.
+            <span v-if="T_AND_C_URL">
+              <a :href="T_AND_C_URL">Terms and conditions</a>
+            </span>
+          </div>
+          <div>
+            Powered by
+            <a
+              style="color: '#fff', textDecoration: 'underline'"
+              href="https://graphile.org/postgraphile"
+              >PostGraphile</a
+            >
+          </div>
         </div>
-        <div>
-          Powered by
-          <a
-            style="color: '#fff', textDecoration: 'underline'"
-            href="https://graphile.org/postgraphile"
-            >PostGraphile</a
-          >
-        </div>
-      </div>
-    </Footer>
-  </Layout>
+      </v-col>
+    </v-footer>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
 import {
   SetupContext,
   computed,
@@ -96,17 +110,6 @@ const SharedLayoutQuery = gql`
 export default createComponent({
   name: "DefaultLayout",
   components: {
-    Avatar,
-    Col,
-    Dropdown,
-    DropdownButton: Dropdown.Button,
-    Header: Layout.Header,
-    Icon,
-    Layout,
-    Menu,
-    MenuItem: Menu.Item,
-    Row,
-    SubMenu: Menu.SubMenu,
     Warn,
   },
   setup(_props, _context: SetupContext) {
@@ -131,18 +134,4 @@ export default createComponent({
   },
 });
 </script>
-<style lang="less" scoped>
-.ant-layout-header {
-  background: #fff;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 2px 8px #f0f1f2;
-  z-index: 10;
-  max-width: 100%;
-}
-img {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-</style>
+<style lang="sass" scoped></style>
