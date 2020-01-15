@@ -9,7 +9,7 @@ export const options = function({ app }) {
     breakpoint: { scrollbarWidth: 12 },
     theme: {
       themes: {
-        light: { primary: 'blue' },
+        light: { primary: colors.blue },
       },
     },
   };
@@ -19,7 +19,7 @@ export const options = function({ app }) {
       iconfont: 'mdi', // default - only for display purposes
     },
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.red,
