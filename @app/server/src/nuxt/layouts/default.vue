@@ -1,53 +1,14 @@
 <template>
   <v-app>
-    <v-app-bar
-      short
-      dense
-      dark
-      elevate-on-scroll
-      src="https://picsum.photos/1920/1080?random"
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-4"
-    >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-        ></v-img>
-      </template>
-
-      <v-spacer></v-spacer>
-      <v-toolbar-title>Title</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-menu bottom left>
-        <template v-slot:activator="{ on }">
-          <v-btn icon color="yellow" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="(item, i) in [{ title: 'menu list' }]" :key="i">
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-app-bar>
-    <v-sheet id="scrolling-techniques-4" class="overflow-y-auto">
-      <v-container>
+    <topbar :links="links" />
+    <!-- Sizes your content based upon application components -->
+    <v-content>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <!-- Content provied by nuxt-router -->
         <Nuxt />
       </v-container>
-    </v-sheet>
+    </v-content>
 
     <v-footer absolute class="font-weight-medium">
       <v-col class="text-center" cols="12">
@@ -76,7 +37,7 @@
 <script lang="ts">
 import {
   SetupContext,
-  computed,
+  // computed,
   createComponent,
   reactive,
   // watch,
@@ -85,7 +46,7 @@ import {
 } from "@vue/composition-api";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import Warn from "~/components/Warn.vue";
+import { Warn, Topbar } from "~/components";
 import { User } from "@app/graphql";
 import { safeCast } from "../../utils/propHelpers";
 
@@ -111,6 +72,7 @@ export default createComponent({
   name: "DefaultLayout",
   components: {
     Warn,
+    Topbar,
   },
   setup(_props, _context: SetupContext) {
     const { result, loading } = useQuery(SharedLayoutQuery);
@@ -122,13 +84,27 @@ export default createComponent({
     const state = reactive({
       projectName: process.env.projectName,
       companyName: process.env.companyName,
-      isLoggedIn: computed(() => (currentUser ? true : false)),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
+    const links = [
+      {
+        title: "Home",
+        to: `/`,
+      },
+      {
+        title: "About",
+        to: `/about`,
+      },
+      {
+        title: "Login",
+        to: `/login`,
+      },
+    ];
     return {
       result,
       currentUser,
       loading,
+      links,
       ...toRefs(state),
     };
   },
