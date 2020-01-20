@@ -1,7 +1,7 @@
 import colors from "vuetify/es5/util/colors";
-import "@mdi/font/css/materialdesignicons.css" // Ensure you are using css-loader
-import * as reply from "~/preset/reply"
-import _ from "lodash"
+import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
+import * as reply from "~/preset/reply";
+import _ from "lodash";
 
 const preset = reply.default;
 export const options = function({ app }) {
@@ -16,19 +16,19 @@ export const options = function({ app }) {
 
   return {
     icons: {
-      iconfont: 'mdi', // default - only for display purposes
+      iconfont: "mdi", // default - only for display purposes
     },
     theme: {
       dark: false,
       themes: {
         dark: {
           primary: colors.red,
-          test: colors.blue
-        }
-      }
+          test: colors.blue,
+        },
+      },
     },
-    preset:_.merge(preset, customOptions),
+    preset: _.merge(preset, customOptions),
   };
-}
+};
 
 export default options;

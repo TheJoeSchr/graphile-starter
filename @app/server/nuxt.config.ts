@@ -1,6 +1,7 @@
 import path from "path";
 import { projectName, companyName } from "@app/config/dist/index"; //! imported here because it otherwise complains about not finding it and also overwrits gql query results
-const pN:string|null=projectName,cN:string|null = companyName;
+const pN: string | null = projectName,
+  cN: string | null = companyName;
 export default {
   modulesDir: [
     path.resolve(__dirname, "../../node_modules/"),
@@ -31,10 +32,7 @@ export default {
   loading: { color: "#3B8070" },
   css: [
     "src/nuxt/assets/css/main.css",
-    {
-      src: "ant-design-vue/dist/antd.less",
-      lang: "less",
-    },
+    "@mdi/font/css/materialdesignicons.css",
   ],
   build: {
     extend(config: any, ctx: any) {
@@ -53,12 +51,15 @@ export default {
       },
     },
     babel: {
-      plugins: ["@babel/plugin-proposal-optional-chaining","@babel/plugin-proposal-nullish-coalescing-operator"],
+      plugins: [
+        "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-proposal-nullish-coalescing-operator",
+      ],
     },
   },
-  buildModules: ["@nuxt/typescript-build",  "@nuxtjs/vuetify",],
+  buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],
   modules: ["@nuxtjs/axios", "~/modules/nuxt-postgraphile", "@nuxtjs/apollo"],
-  plugins: ["~/plugins/composition-api","~/plugins/provide-apollo-client"],
+  plugins: ["~/plugins/composition-api", "~/plugins/provide-apollo-client"],
   axios: {},
   // Give apollo module options
   apollo: {
@@ -103,10 +104,10 @@ export default {
       devtools: true,
     },
   },
-    // Doc: https://github.com/nuxt-community/vuetify-module
+  // Doc: https://github.com/nuxt-community/vuetify-module
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
     optionsPath: "~/vuetify.options.js",
     treeShake: true,
-  }
+  },
 };
