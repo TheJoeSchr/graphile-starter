@@ -1,68 +1,43 @@
 <template>
-  <Layout>
-    <Header>
-      <Row type="flex" justify="space-between">
-        <Col span="6">
-          <NuxtLink to="/">Home</NuxtLink>
-        </Col>
-        <Col>
-          <h3>{{ projectName }}</h3>
-        </Col>
-        <Col span="6" style="textAlign: right">
-          <p v-if="loading" to="/login"></p>
-          <template v-else>
-            <DropdownButton v-if="isLoggedIn && currentUser">
-              User: {{ currentUser.username }}
-              <Menu slot="overlay">
-                <MenuItem>
-                  <NuxtLink to="/settings">
-                    <Warn :okay="false">Settings</Warn>
-                  </NuxtLink>
-                </MenuItem>
-                <MenuItem>
-                  <a onClick="{handleLogout}">Logout</a>
-                </MenuItem>
-              </Menu>
-            </DropdownButton>
-            <NLink v-if="!isLoggedIn" to="/login">
-              <a class="header-login-button">Sign in</a>
-            </NLink>
-          </template>
-        </Col>
-      </Row>
-    </Header>
-    <Content>
-      <Nuxt />
-    </Content>
-    <Footer
-      style="display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'"
-    >
-      <div>
+  <v-app>
+    <topbar :links="links" />
+    <!-- Sizes your content based upon application components -->
+    <v-content>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <!-- Content provied by nuxt-router -->
+        <Nuxt />
+      </v-container>
+    </v-content>
+
+    <v-footer absolute class="font-weight-medium">
+      <v-col class="text-center" cols="12">
         <div>
-          Copyright &copy; {{ new Date().getFullYear() }} {{ companyName }}. All
-          rights reserved.
-          <span v-if="T_AND_C_URL">
-            <a :href="T_AND_C_URL">Terms and conditions</a>
-          </span>
+          <div>
+            Copyright &copy; {{ new Date().getFullYear() }} {{ companyName }}.
+            All rights reserved.
+            <span v-if="T_AND_C_URL">
+              <a :href="T_AND_C_URL">Terms and conditions</a>
+            </span>
+          </div>
+          <div>
+            Powered by
+            <a
+              style="color: '#fff', textDecoration: 'underline'"
+              href="https://graphile.org/postgraphile"
+              >PostGraphile</a
+            >
+          </div>
         </div>
-        <div>
-          Powered by
-          <a
-            style="color: '#fff', textDecoration: 'underline'"
-            href="https://graphile.org/postgraphile"
-            >PostGraphile</a
-          >
-        </div>
-      </div>
-    </Footer>
-  </Layout>
+      </v-col>
+    </v-footer>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Layout, Avatar, Row, Col, Dropdown, Icon, Menu } from "ant-design-vue";
 import {
   SetupContext,
-  computed,
+  // computed,
   createComponent,
   reactive,
   // watch,
@@ -71,7 +46,7 @@ import {
 } from "@vue/composition-api";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import Warn from "~/components/Warn.vue";
+import { Warn, Topbar } from "~/components";
 import { User } from "@app/graphql";
 import { safeCast } from "../../utils/propHelpers";
 
@@ -96,18 +71,8 @@ const SharedLayoutQuery = gql`
 export default createComponent({
   name: "DefaultLayout",
   components: {
-    Avatar,
-    Col,
-    Dropdown,
-    DropdownButton: Dropdown.Button,
-    Header: Layout.Header,
-    Icon,
-    Layout,
-    Menu,
-    MenuItem: Menu.Item,
-    Row,
-    SubMenu: Menu.SubMenu,
     Warn,
+    Topbar,
   },
   setup(_props, _context: SetupContext) {
     const { result, loading } = useQuery(SharedLayoutQuery);
@@ -119,30 +84,30 @@ export default createComponent({
     const state = reactive({
       projectName: process.env.projectName,
       companyName: process.env.companyName,
-      isLoggedIn: computed(() => (currentUser ? true : false)),
       T_AND_C_URL: process.env.T_AND_C_URL,
     });
+    const links = [
+      {
+        title: "Home",
+        to: `/`,
+      },
+      {
+        title: "About",
+        to: `/about`,
+      },
+      {
+        title: "Login",
+        to: `/login`,
+      },
+    ];
     return {
       result,
       currentUser,
       loading,
+      links,
       ...toRefs(state),
     };
   },
 });
 </script>
-<style lang="less" scoped>
-.ant-layout-header {
-  background: #fff;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 2px 8px #f0f1f2;
-  z-index: 10;
-  max-width: 100%;
-}
-img {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-</style>
+<style lang="sass" scoped></style>

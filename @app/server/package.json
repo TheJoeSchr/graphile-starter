@@ -19,7 +19,6 @@
     "@graphile/pg-pubsub": "^4.4.5",
     "@graphile/pro": "^0.9.0",
     "@graphile/subscriptions-lds": "^4.4.5",
-    "@nuxt/types": "latest",
     "@nuxt/typescript-runtime": "latest",
     "@nuxt/vue-app": "^2.10.2",
     "@nuxtjs/apollo": "^4.0.0-rc9",
@@ -41,7 +40,6 @@
     "@typescript-eslint/parser": "^2.5.0",
     "@vue/apollo-composable": "^4.0.0-alpha.3",
     "@vue/composition-api": "^0.3.3",
-    "ant-design-vue": "^1.4.4",
     "chalk": "^3.0.0",
     "concurrently": "^5.0.0",
     "connect-pg-simple": "^6.0.1",
@@ -60,7 +58,7 @@
     "lerna": "^3.18.3",
     "lodash": "^4.17.15",
     "morgan": "^1.9.1",
-    "nuxt": "latest",
+    "nuxt": "^2.10.2",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "pg": "^7.12.1",
@@ -75,11 +73,14 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.4",
+    "@mdi/font": "^4.7.95",
     "@nuxt/typescript-build": "^0.5.1",
+    "@nuxtjs/vuetify": "^1.10.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-import": "^1.12.2",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
-    "typescript": "^3.7.3"
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "typescript": "^3.7.3",
+    "vue-cli-plugin-vuetify-preset-reply": "^1.0.1"
   }
 }
