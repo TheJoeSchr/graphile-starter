@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
-          - "5432:5432"
+          - "0.0.0.0:5432:5432"
         # needed because the postgres container does not provide a healthcheck
         options:
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s
@@ -40,5 +40,6 @@ jobs:
           yarn build
           yarn lint
           yarn test
+          yarn depcheck
         env:
           CI: true

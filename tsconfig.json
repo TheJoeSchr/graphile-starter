@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "incremental": true,
     "noEmitOnError": true,
 
@@ -13,8 +14,6 @@
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "preserveConstEnums": true,
     "resolveJsonModule": true,
     "sourceMap": true,
@@ -27,6 +26,9 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
 
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
     "noEmit": true,
     "declaration": true,
     "declarationMap": true,
@@ -36,5 +38,12 @@
       "~/*": ["./@app/server/src/nuxt/*"] // for Vetur
     }
   },
-  "exclude": ["@app/e2e"]
+  "include": [],
+  "exclude": ["@app/e2e"],
+  "references": [
+    { "path": "@app/config" },
+    { "path": "@app/graphql" },
+    { "path": "@app/server" },
+    { "path": "@app/worker" }
+  ]
 }

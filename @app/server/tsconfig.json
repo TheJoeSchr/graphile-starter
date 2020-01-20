@@ -29,5 +29,12 @@
       "@nuxtjs/vuetify"
     ]
   },
-  "exclude": ["__tests__"]
+  "exclude": ["__tests__", "node_modules"],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.vue",
+    "./src/**/*.js",
+    "./src/**/*.json"
+  ],
+  "references": [{ "path": "../graphql" }, { "path": "../config" }]
 }

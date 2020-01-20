@@ -5,7 +5,6 @@
   "private": true,
   "scripts": {
     "build": "yarn nuxt-ts:env build",
-    "build:essential": "echo \"No pre-build needed for nuxt-ts\"",
     "dev": "yarn nuxt-ts:env:debug dev",
     "start": "yarn nuxt-ts:env start",
     "generate": "yarn nuxt-ts:env generate",
