@@ -1,9 +1,5 @@
-import CustomCard from "./CustomCard.vue"
-import Topbar from "./Topbar.vue"
-import Warn from "./Warn.vue"
+import CustomCard from "./CustomCard.vue";
+import Topbar from "./Topbar.vue";
+import Warn from "./Warn.vue";
 
-export {
-  CustomCard,
-  Topbar,
-  Warn
-}
+export { CustomCard, Topbar, Warn };
