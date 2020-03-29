@@ -31,7 +31,7 @@ if [ "$1" = "dev" ]; then
   apt-get -y install --no-install-recommends neovim tmux locales dos2unix
   
   # prepare vscode extension folder for non-root users
-  mkdir -p ~/.vscode-server ; chown -R $USER_UID:$USER_UID ~/.vscode-server
+  mkdir -p /home/node/.vscode-server ; chown -R $USER_UID:$USER_UID /home/node/.vscode-server
 fi
 
 # Install eslint globally
