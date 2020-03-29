@@ -29,6 +29,9 @@ if [ "$1" = "dev" ]; then
   # locales for tmux: https://github.com/GameServerManagers/LinuxGSM/issues/817
   # dos2unix for config files of windows user
   apt-get -y install --no-install-recommends neovim tmux locales dos2unix
+  
+  # prepare vscode extension folder for non-root users
+  mkdir -p ~/.vscode-server ; chown -R $USER_UID:$USER_UID ~/.vscode-server
 fi
 
 # Install eslint globally
