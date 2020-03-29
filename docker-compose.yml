@@ -78,22 +78,21 @@ services:
       #* to use your local configs inside container
       ## avoids vscode extensions reinstalls
       ## https://code.visualstudio.com/docs/remote/containers-advanced#_avoiding-extension-reinstalls-on-container-rebuild
-      # - vscode-extensions:/root/.vscode-server
+      #- vscode-extensions:~/.vscode-server
       #! LINUX HOST ONLY
       ## copies your ssh credentials, to be able to use them from within the container
       ## (see: https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container)
-      # - $HOME/.ssh:/root/.home-localhost/.ssh:ro
-      ## .bashrc
-      # - $HOME/.bashrc:/root/.home-localhost/.bashrc:ro
-      ## .gitconfig
-      # - $HOME/.gitconfig:/root/.home-localhost/.gitconfig:ro
-      ## .tmux
-      # - $HOME/tmux.conf:/root/.home-localhost/tmux.conf:ro
+      #- $HOME/.ssh:/.home-localhost/.ssh:ro
+      # .bashrc
+      #- $HOME/.bashrc:/.home-localhost/.bashrc:ro
+      # .gitconfig
+      #- $HOME/.gitconfig:/.home-localhost/.gitconfig:ro
+      # .tmux
+      #- $HOME/.tmux.conf:/.home-localhost/.tmux.conf:ro
       ##! WINDOWS HOST ONLY
       ##* on windows host can't mount single files
       ## comment all the other `.home-localhost` lines above this
-      # - $HOME:/root/.home-localhost:ro
-
+      # - $HOME:/.home-localhost:ro
     working_dir: /work
     networks:
       - default
