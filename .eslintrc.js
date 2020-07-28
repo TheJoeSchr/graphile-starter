@@ -5,6 +5,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   extends: [
     "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/typescript",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react",
@@ -89,6 +91,35 @@ module.exports = {
       {
         env: "literal",
         schemaString,
+        validators: [
+          "ExecutableDefinitions",
+          "FieldsOnCorrectType",
+          "FragmentsOnCompositeTypes",
+          "KnownArgumentNames",
+          "KnownDirectives", // disabled by default in relay
+          // 'KnownFragmentNames', // disabled by default in all envs
+          "KnownTypeNames",
+          "LoneAnonymousOperation",
+          "NoFragmentCycles",
+          "NoUndefinedVariables", //disabled by default in relay
+          // 'NoUnusedFragments' // disabled by default in all envs
+          // 'NoUnusedVariables' throws even when fragments use the variable
+          "OverlappingFieldsCanBeMerged",
+          "PossibleFragmentSpreads",
+          "ProvidedRequiredArguments", // disabled by default in relay
+          "ScalarLeafs", // disabled by default in relay
+          "SingleFieldSubscriptions",
+          "UniqueArgumentNames",
+          "UniqueDirectivesPerLocation",
+          "UniqueFragmentNames",
+          "UniqueInputFieldNames",
+          "UniqueOperationNames",
+          "UniqueVariableNames",
+          "ValuesOfCorrectType",
+          "VariablesAreInputTypes",
+          // "VariablesDefaultValueAllowed",
+          "VariablesInAllowedPosition",
+        ],
       },
     ],
     "graphql/named-operations": [

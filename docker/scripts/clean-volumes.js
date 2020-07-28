@@ -2,36 +2,16 @@
 const { execSync } = require("child_process");
 const { basename, dirname, resolve } = require("path");
 
-const projectName = basename(dirname(resolve(__dirname, "..")));
+const projectName = basename(dirname(resolve(__dirname, ".."))).replace(
+  /[^a-z0-9]/g,
+  ""
+);
 
-  const nmNames = [
-    "vscode-extensions",
-    "db-volume",
-    "nm_root",
-    "nm_app_client",
-    "nm_app_config",
-    "nm_app_db",
-    "nm_app_e2e",
-    "nm_app_graphql",
-    "nm_app_server",
-    "nm_app_worker"
-  ]
-  nmNames.forEach((nmName)=> {
-    // remove each container
-    try {
-        execSync( `docker volume rm ${projectName}_${nmName}`,
-          { stdio: "inherit" }
-        );
-    } catch (e) {
-      /* noop: volume might not exist, still delete others */
-    }
-    // remove each container for VSCode .devcontainer as well
-    try {
-      execSync(
-        `docker volume rm ${projectName}_devcontainer_${nmName}`,
-        { stdio: "inherit" }
-      );
-    } catch (e) {
-      /* noop: volume might not exist, still delete others */
-    }
-  })
+try {
+  execSync(
+    `docker volume rm ${projectName}_vscode-extensions ${projectName}_devcontainer_db-volume ${projectName}_devcontainer_node_modules-volume ${projectName}_devcontainer_vscode-extensions`,
+    { stdio: "inherit" }
+  );
+} catch (e) {
+  /* noop */
+}

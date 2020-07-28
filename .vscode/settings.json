@@ -6,12 +6,6 @@
   "eslint.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--ext .js,.jsx,.ts,.tsx,.graphql .",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-
-  // ESLint calls prettier for these types already, so don't let them squabble
-  "javascript.format.enable": false,
-  "typescript.format.enable": false,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -19,15 +13,27 @@
     "typescriptreact",
     "graphql"
   ],
-  "editor.codeActionsOnSaveTimeout": 750,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "prettier.disableLanguages": [],
+
+  "files.associations": {
+    ".gmrc": "jsonc"
+  },
+
   "[graphql]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": false
     }
   },
-  "[typescriptreact]": {
-    "editor.formatOnSave": false
-  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

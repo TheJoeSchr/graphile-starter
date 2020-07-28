@@ -7,13 +7,19 @@ if (!process.env.TEST_DATABASE_URL) {
 }
 export const TEST_DATABASE_URL: string = process.env.TEST_DATABASE_URL;
 
-export type User = { id: number; _password?: string; _email?: string };
+export type User = {
+  id: string;
+  username: string;
+  _password?: string;
+  _email?: string;
+};
+export type Organization = { id: string; name: string };
 
 // Make sure we release those pgPools so that our tests exit!
 afterAll(() => {
   const keys = Object.keys(pools);
   return Promise.all(
-    keys.map(async key => {
+    keys.map(async (key) => {
       try {
         const pool = pools[key];
         delete pools[key];
@@ -126,18 +132,40 @@ export const createUsers = async function createUsers(
   return users;
 };
 
+export const createOrganizations = async function createOrganizations(
+  client: PoolClient,
+  count: number = 1
+) {
+  const organizations: Organization[] = [];
+  for (let i = 0; i < count; i++) {
+    const slug = `organization-${i}`;
+    const name = `Organization ${i}`;
+    const {
+      rows: [organization],
+    } = await client.query(
+      `
+        select * from app_public.create_organization($1, $2)
+      `,
+      [slug, name]
+    );
+    organizations.push(organization);
+  }
+
+  return organizations;
+};
+
 /******************************************************************************/
 
 export const createSession = async (
   client: PoolClient,
-  userId: number
+  userId: string
 ): Promise<{ uuid: string }> => {
   const {
     rows: [session],
   } = await client.query(
     `
       insert into app_private.sessions (user_id)
-      values ($1::int)
+      values ($1::uuid)
       returning *
     `,
     [userId]

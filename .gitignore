@@ -10,3 +10,6 @@ dist
 /@app/server/.nuxt/
 .agignore
 *.tsbuildinfo
+.ethereal
+yarn-error.log
+.idea/*
